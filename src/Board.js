@@ -40,6 +40,7 @@ class Board extends Component {
 			hasWon: false,
 			board: this.createBoard(),
 		};
+		this.restart = this.restart.bind(this);
 		// TODO: set initial state
 	}
 
@@ -88,12 +89,22 @@ class Board extends Component {
 
 	/** Render game board or winning message. */
 
+	restart() {
+		this.setState(() => ({
+			hasWon: false,
+			board: this.createBoard(),
+		}));
+	}
+
 	render() {
 		if (this.state.hasWon) {
 			return (
 				<div className="winner">
 					<div className="neon-orange">You</div>
 					<div className="neon-blue">Win!</div>
+					<button className="btn" onClick={this.restart}>
+						Play Again?
+					</button>
 				</div>
 			);
 		}
